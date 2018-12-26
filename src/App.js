@@ -1,28 +1,64 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import Tabs               from './components/Tabs';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+	state = {
+		tabs: [
+			{
+				title: 'Tab 1',
+				content: 'Content for Tab 1',
+				innerTabs: [
+					{
+						title: 'Tab 1',
+						content: 'Inner Content for Tab 1',
+					},
+					{
+						title: 'Tab 2',
+						content: 'Inner Content for Tab 2',
+					},
+					{
+						title: 'Tab 3',
+						content: 'Inner Content for Tab 3',
+					}
+				]
+			},
+			{
+				title: 'Tab 2',
+				content: 'Content for Tab 2',
+				innerTabs: [
+					{
+						title: 'Tab 1',
+						content: 'Inner Content for Tab 1',
+					},
+					{
+						title: 'Tab 2',
+						content: 'Inner Content for Tab 2',
+					}
+				]
+			},
+			{
+				title: 'Tab 3',
+				content: 'Content for Tab 3',
+				innerTabs: []
+			},
+		]
+	};
+
+	render() {
+		const tabs = this.state.tabs.map(tab => <Tabs.Tab title={tab.title}>{
+			tab.innerTabs.length > 0 ?
+				<Tabs>
+					{tab.innerTabs.map(tab => <Tabs.Tab title={tab.title}>{tab.content}</Tabs.Tab>)}
+				</Tabs>
+				: tab.content
+		}</Tabs.Tab>);
+		return (
+			<Tabs>
+				{tabs}
+			</Tabs>
+		);
+	}
 }
 
 export default App;
