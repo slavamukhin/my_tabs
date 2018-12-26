@@ -46,10 +46,10 @@ class App extends Component {
 	};
 
 	render() {
-		const tabs = this.state.tabs.map(tab => <Tabs.Tab title={tab.title}>{
+		const tabs = this.state.tabs.map((tab, index) => <Tabs.Tab key={index} title={tab.title}>{
 			tab.innerTabs.length > 0 ?
 				<Tabs>
-					{tab.innerTabs.map(tab => <Tabs.Tab title={tab.title}>{tab.content}</Tabs.Tab>)}
+					{tab.innerTabs.map((tab, index) => <Tabs.Tab key={index} title={tab.title}>{tab.content}</Tabs.Tab>)}
 				</Tabs>
 				: tab.content
 		}</Tabs.Tab>);
